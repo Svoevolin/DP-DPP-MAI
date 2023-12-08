@@ -39,22 +39,23 @@ def _conditional_optimization(matrix: list, r: list, s: list, p: int, n: int, pe
 
 
 def _unconditional_optimization(matrix: list, t_0: int, period: int) -> list:
+    print("\nБезусловная оптимизация")
 
     optimal_strategy = [] # будем сохранять здесь выбор для каждого года
     t_current = t_0  # возраст оборудования на текущий год эксплуатации
 
     for k in range(period): # годы эксплуатации растут до планового периода
         print(f'{k + 1}-й год эксплуатации')
-        print(f'Возраст оборудования: {t_current}')
+        print(f'    Возраст оборудования: {t_current}')
 
         if matrix[k][t_current][1] == 'З':
-            print('Выгоднее заменить это оборудование')
             optimal_strategy.append(matrix[k][t_current])
+            print('    Выгоднее заменить это оборудование')
             t_current = 0 # оборудование заменится на новое с возрастом 0 лет
 
         else:
             optimal_strategy.append(matrix[k][t_current])
-            print('Выгоднее оставить это оборудование')
+            print('    Выгоднее оставить это оборудование')
             t_current += 1 # оборудование постареет на 1 год
 
     return optimal_strategy
